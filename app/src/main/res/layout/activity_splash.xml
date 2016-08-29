@@ -9,30 +9,30 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/wave"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/cd_wave"
         android:paddingBottom="80dp"
         android:scaleType="center"
         android:scaleX="1.12"
         android:scaleY="1.12"
-        android:contentDescription="@string/cd_wave" />
+        android:src="@drawable/wave" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:contentDescription="@string/cd_logo"
         android:paddingBottom="80dp"
-        android:contentDescription="@string/cd_logo" />
+        android:src="@drawable/logo" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:text="@string/label_copyright"
-        android:textColor="@color/colorBackgroundLight"/>
+        android:textColor="@color/colorBackgroundLight" />
 </RelativeLayout>

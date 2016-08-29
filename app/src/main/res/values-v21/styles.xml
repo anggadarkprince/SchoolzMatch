@@ -16,13 +16,4 @@
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar.Fullscreen">
-        <item name="android:windowFullscreen">true</item>
-    </style>
-
 </resources>

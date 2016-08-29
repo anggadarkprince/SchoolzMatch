@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Schoolz Match</string>
-    <string name="cd_wave">cd_wave</string>
+    <string name="app_subtitle">Student Morning Assist</string>
     <string name="label_copyright">© Copyright 2016 Sketch Project Studio</string>
+    <string name="cd_wave">cd_wave</string>
     <string name="cd_logo">Schoolz Logo</string>
+    <string name="button_profile">PROFILE</string>
+    <string name="button_schedule">SCHEDULE</string>
+    <string name="button_about">ABOUT</string>
+    <string name="button_exit">EXIT APP</string>
 </resources>

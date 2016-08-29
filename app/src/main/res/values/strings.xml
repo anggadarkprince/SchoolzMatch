@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Schoolz Match</string>
+    <string name="cd_wave">cd_wave</string>
+    <string name="label_copyright">© Copyright 2016 Sketch Project Studio</string>
+    <string name="cd_logo">Schoolz Logo</string>
 </resources>

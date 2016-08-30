@@ -1,11 +1,41 @@
 <resources>
     <string name="app_name">Schoolz Match</string>
     <string name="app_subtitle">Student Morning Assist</string>
-    <string name="label_copyright">© Copyright 2016 Sketch Project Studio</string>
+
     <string name="cd_wave">cd_wave</string>
     <string name="cd_logo">Schoolz Logo</string>
+
     <string name="button_profile">PROFILE</string>
     <string name="button_schedule">SCHEDULE</string>
     <string name="button_about">ABOUT</string>
     <string name="button_exit">EXIT APP</string>
+    <string name="button_save">SAVE</string>
+
+    <string name="prompt_grade">Your class grade</string>
+    <string name="prompt_school">Your school name</string>
+    <string name="prompt_address">Where do you live?</string>
+    <string name="prompt_name">Put your name here</string>
+
+    <string name="label_copyright">© Copyright 2016 Sketch Project Studio</string>
+
+    <string name="label_profile">Profile</string>
+    <string name="label_name">NAME</string>
+    <string name="label_address">ADDRESS</string>
+    <string name="label_gender">GENDER</string>
+    <string name="label_female">Female</string>
+    <string name="label_male">Male</string>
+
+    <string name="label_school">School</string>
+    <string name="label_school_name">SCHOOL NAME</string>
+    <string name="label_grade">GRADE</string>
+    <string name="app_about">About</string>
+    <string name="app_profile">Profile</string>
+    <string name="label_about_thanks">Thanks for using our App</string>
+    <string name="label_about_desc">Schoolz Match is lightweight application that helps students manage their morning activity so they could arrive at school in time</string>
+    <string name="label_about_email">email anggadarkprince@gmail.com</string>
+    <string name="label_about_website">website angga-ari.com</string>
+    <string name="label_about_third_party">Third-party licence</string>
+    <string name="label_about_library">Free open source project that have contributed to Schoolz Match</string>
+    <string name="label_library_betterpicked">BetterPicked</string>
+    <string name="label_library_betterpicked_desc">Version: 1.5.2\nCopyright 2013 Derek Braymayer\nApache licence 2.0</string>
 </resources>

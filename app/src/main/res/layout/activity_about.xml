@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    tools:context=".AboutActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,24 +13,23 @@
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin_large"
         android:paddingRight="@dimen/activity_horizontal_margin_large"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context=".AboutActivity">
+        android:paddingTop="@dimen/activity_vertical_margin">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="20dp"
-            android:text="Thanks for using"
+            android:layout_marginTop="10dp"
+            android:text="@string/label_about_thanks"
             android:textColor="@color/colorLight"
-            android:textSize="30sp" />
+            android:textSize="25sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:alpha="0.8"
-            android:text="Schoolz Match is lightweight application that helps students manage their morning activity so they could arrive at school in time"
+            android:text="@string/label_about_desc"
             android:textColor="@color/colorLight" />
 
         <ImageView
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:autoLink="all"
-            android:text="email anggadarkprince@gmail.com"
+            android:text="@string/label_about_email"
             android:textColor="@color/colorLight"
             android:textColorLink="@color/colorAccent" />
 
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:autoLink="all"
-            android:text="website angga-ari.com"
+            android:text="@string/label_about_website"
             android:textColor="@color/colorLight"
             android:textColorLink="@color/colorAccent" />
 
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:text="Third-party licence"
+            android:text="@string/label_about_third_party"
             android:textColor="@color/colorLight"
             android:textSize="20sp" />
 
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:alpha="0.8"
-            android:text="Free open source project that have contributed to Schoolz Match"
+            android:text="@string/label_about_library"
             android:textColor="@color/colorLight" />
 
         <TextView
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:text="BetterPicked"
+            android:text="@string/label_library_betterpicked"
             android:textColor="@color/colorLight"
             android:textSize="17sp" />
 
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:alpha="0.8"
-            android:text="Version: 1.5.2\nCopyright 2013 Derek Braymayer\nApache licence 2.0"
+            android:text="@string/label_library_betterpicked_desc"
             android:textColor="@color/colorLight" />
 
     </LinearLayout>

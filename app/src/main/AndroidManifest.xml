@@ -30,13 +30,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".ProfileActivity"
+        <activity
+            android:name=".ProfileActivity"
             android:label="@string/app_profile"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity
+            android:name=".AlarmActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_alarm"
+            android:theme="@style/AppTheme.NoActionBar.Fullscreen" />
     </application>
 
 </manifest>

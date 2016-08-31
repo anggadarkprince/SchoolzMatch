@@ -1,8 +1,5 @@
 package com.sketchproject.schoolzmatch;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -12,13 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
-import com.sketchproject.schoolzmatch.database.DBHelper;
 import com.sketchproject.schoolzmatch.database.Profile;
+import com.sketchproject.schoolzmatch.database.ProfileRepository;
 import com.sketchproject.schoolzmatch.modules.Validator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
     private Validator validator;
@@ -29,6 +26,8 @@ public class ProfileActivity extends AppCompatActivity {
     private EditText school;
     private EditText grade;
 
+    private ProfileRepository profileRepository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +35,8 @@ public class ProfileActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+        profileRepository = new ProfileRepository(getApplicationContext());
 
         validator = new Validator();
 
@@ -83,38 +84,22 @@ public class ProfileActivity extends AppCompatActivity {
      * Load profile from database
      */
     private void loadProfile() {
-        DBHelper dbHelper = new DBHelper(getApplicationContext());
-        SQLiteDatabase mDatabase = dbHelper.getReadableDatabase();
-
-        String[] projection = {Profile.KEY, Profile.VALUE};
-
-        Cursor cursor = mDatabase.query(Profile.TABLE, projection, null, null, null, null, null);
-
-        HashMap<String, String> profiles = new HashMap<>();
-        if (cursor.moveToFirst()) {
-            do {
-                profiles.put(cursor.getString(cursor.getColumnIndexOrThrow(Profile.KEY)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(Profile.VALUE)));
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        dbHelper.close();
+        Map<String, Object> profiles = profileRepository.retrieve();
 
         if (profiles.containsKey("name")) {
-            name.setText(profiles.get("name"));
+            name.setText(String.valueOf(profiles.get("name")));
         }
 
         if (profiles.containsKey("address")) {
-            address.setText(profiles.get("address"));
+            address.setText(String.valueOf(profiles.get("address")));
         }
 
         if (profiles.containsKey("school")) {
-            school.setText(profiles.get("school"));
+            school.setText(String.valueOf(profiles.get("school")));
         }
 
         if (profiles.containsKey("grade")) {
-            grade.setText(profiles.get("grade"));
+            grade.setText(String.valueOf(profiles.get("grade")));
         }
 
         if (profiles.containsKey("gender")) {
@@ -186,38 +171,9 @@ public class ProfileActivity extends AppCompatActivity {
      * @return save status
      */
     private boolean save(List<Profile> data) {
-        DBHelper dbHelper = new DBHelper(getApplicationContext());
-        SQLiteDatabase mDatabase = null;
-
-        String[] projection = {Profile.KEY};
-
         for (int i = 0; i < data.size(); i++) {
-            Profile profile = data.get(i);
-
-            mDatabase = dbHelper.getReadableDatabase();
-            String selection = Profile.KEY + " = ?";
-            String[] selectionArgs = {String.valueOf(profile.getKey())};
-            Cursor cursor = mDatabase.query(Profile.TABLE, projection, selection, selectionArgs, null, null, null);
-
-            mDatabase = dbHelper.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            values.put(Profile.KEY, profile.getKey());
-            values.put(Profile.VALUE, String.valueOf(profile.getValue()));
-
-            if (cursor.moveToFirst()) {
-                // update
-                mDatabase.update(Profile.TABLE, values, selection, selectionArgs);
-            } else {
-                // insert
-                mDatabase.insert(Profile.TABLE, null, values);
-            }
-            cursor.close();
+            profileRepository.store(data.get(i));
         }
-
-        if (mDatabase != null) {
-            mDatabase.close();
-        }
-
         return true;
     }
 }

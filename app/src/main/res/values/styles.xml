@@ -26,4 +26,9 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
+    <style name="CustomBetterPickerTheme" parent="BetterPickersDialogFragment">
+        <item name="bpDialogBackground">@color/colorPrimary</item>
+        <item name="bpButtonBackground">@color/colorBackground</item>
+    </style>
+
 </resources>

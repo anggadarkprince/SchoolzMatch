@@ -37,8 +37,8 @@
     <string name="label_about_website">website angga-ari.com</string>
     <string name="label_about_third_party">Third-party licence</string>
     <string name="label_about_library">Free open source project that have contributed to Schoolz Match</string>
-    <string name="label_library_betterpicked">BetterPicked</string>
-    <string name="label_library_betterpicked_desc">Version: 1.5.2\nCopyright 2013 Derek Braymayer\nApache licence 2.0</string>
+    <string name="label_library_better_pickers">BetterPickers</string>
+    <string name="label_library_better_pickers_desc">Version: 1.5.2\nCopyright 2013 Derek Braymayer\nApache licence 2.0</string>
     <string name="label_next_task">NEXT TASK</string>
     <string name="button_turn_off">TURN OFF</string>
     <string name="label_reminder">REMINDER</string>
@@ -82,5 +82,6 @@
     <string name="label_thursday">Thursday</string>
     <string name="label_friday">Friday</string>
     <string name="label_saturday">Saturday</string>
+    <string name="time_picker_result_value">%1$s:%2$s</string>
 
 </resources>

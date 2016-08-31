@@ -1,5 +1,6 @@
 package com.sketchproject.schoolzmatch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -59,7 +60,8 @@ public class ScheduleActivity extends AppCompatActivity {
 
     @OnClick(R.id.buttonDetail)
     void detail() {
-        //Intent intentDetail = new Intent(ScheduleActivity.this, DetailSchedule.class);
+        Intent intentDetail = new Intent(ScheduleActivity.this, BellActivity.class);
+        startActivity(intentDetail);
     }
 
     @OnClick(R.id.buttonSave)

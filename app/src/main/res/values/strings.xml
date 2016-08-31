@@ -75,5 +75,12 @@
     <string name="label_from_home">FROM HOME</string>
     <string name="label_school_distance">School Distance</string>
     <string name="label_desc_school_distance">Distance from home to school</string>
+    <string name="app_bell">School Time</string>
+    <string name="label_monday">Monday</string>
+    <string name="label_tuesday">Tuesday</string>
+    <string name="label_wednesday">Wednesday</string>
+    <string name="label_thursday">Thursday</string>
+    <string name="label_friday">Friday</string>
+    <string name="label_saturday">Saturday</string>
 
 </resources>

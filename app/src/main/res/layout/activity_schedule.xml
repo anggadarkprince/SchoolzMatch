@@ -64,8 +64,9 @@
             android:id="@+id/controlArrival"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/button_list"
-            android:layout_marginBottom="20dp">
+            android:clickable="true">
 
             <TextView
                 android:id="@+id/arrivalExpectationLabel"
@@ -126,8 +127,9 @@
             android:id="@+id/controlHomework"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/button_list"
-            android:layout_marginBottom="10dp">
+            android:clickable="true">
 
             <TextView
                 android:id="@+id/homeworkLabel"
@@ -188,8 +190,9 @@
             android:id="@+id/controlWakeup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/button_list"
-            android:layout_marginBottom="10dp">
+            android:clickable="true">
 
             <TextView
                 android:id="@+id/wakeupLabel"
@@ -250,8 +253,9 @@
             android:id="@+id/controlPray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/button_list"
-            android:layout_marginBottom="10dp">
+            android:clickable="true">
 
             <TextView
                 android:id="@+id/prayLabel"
@@ -312,8 +316,9 @@
             android:id="@+id/controlWorkout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/button_list"
-            android:layout_marginBottom="10dp">
+            android:clickable="true">
 
             <TextView
                 android:id="@+id/workoutLabel"
@@ -374,8 +379,9 @@
             android:id="@+id/controlShower"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/button_list"
-            android:layout_marginBottom="10dp">
+            android:clickable="true">
 
             <TextView
                 android:id="@+id/showerLabel"
@@ -436,8 +442,9 @@
             android:id="@+id/controlBreakfast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/button_list"
-            android:layout_marginBottom="20dp">
+            android:clickable="true">
 
             <TextView
                 android:id="@+id/breakfastLabel"
@@ -498,8 +505,9 @@
             android:id="@+id/controlSchool"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/button_list"
-            android:layout_marginBottom="10dp">
+            android:clickable="true">
 
             <TextView
                 android:id="@+id/travelTimeLabel"
@@ -552,8 +560,9 @@
             android:id="@+id/controlDistance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/button_list"
-            android:layout_marginBottom="20dp">
+            android:clickable="true">
 
             <TextView
                 android:id="@+id/schoolDistanceLabel"

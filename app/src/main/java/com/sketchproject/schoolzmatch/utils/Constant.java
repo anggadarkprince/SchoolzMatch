@@ -19,4 +19,15 @@ public class Constant {
     public static final int NUM_DAY_FRIDAY = 5;
     public static final int NUM_DAY_SATURDAY = 6;
 
+    public static final String ARRIVE_BEFORE = "before";
+    public static final String SCHOOL_DISTANCE = "distance";
+
+    public static final String ACT_HOMEWORK = "Homework";
+    public static final String ACT_WAKEUP = "Wake up";
+    public static final String ACT_PRAY = "Pray";
+    public static final String ACT_WORKOUT = "Workout";
+    public static final String ACT_SHOWER = "Take a bath";
+    public static final String ACT_BREAKFAST = "Breakfast";
+    public static final String ACT_SCHOOL = "Go to School";
+
 }

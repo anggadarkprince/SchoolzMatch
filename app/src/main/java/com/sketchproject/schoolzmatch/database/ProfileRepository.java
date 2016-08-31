@@ -13,8 +13,8 @@ import java.util.Map;
  * Created by Angga on 31/08/2016 15.39.
  */
 public class ProfileRepository {
-    DBHelper dbHelper;
-    SQLiteDatabase mDatabase;
+    private DBHelper dbHelper;
+    private SQLiteDatabase mDatabase;
 
     public ProfileRepository(Context context){
         dbHelper = new DBHelper(context);

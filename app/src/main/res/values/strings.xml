@@ -83,5 +83,7 @@
     <string name="label_friday">Friday</string>
     <string name="label_saturday">Saturday</string>
     <string name="time_picker_result_value">%1$s:%2$s</string>
+    <string name="arrival_expectation_value">%1$s Minute%2$s</string>
+    <string name="school_distance_value">%1$s KM</string>
 
 </resources>

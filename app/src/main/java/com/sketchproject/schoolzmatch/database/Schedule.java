@@ -1,6 +1,7 @@
 package com.sketchproject.schoolzmatch.database;
 
 import java.sql.Time;
+import java.util.Date;
 
 /**
  * Sketch Project Studio
@@ -16,7 +17,15 @@ public class Schedule {
     private int id;
     private String label;
     private String description;
-    private Time time;
+    private String time;
+
+    public Schedule(){}
+
+    public Schedule(String label, String description, String time) {
+        this.label = label;
+        this.description = description;
+        this.time = time;
+    }
 
     public int getId() {
         return id;
@@ -42,11 +51,11 @@ public class Schedule {
         this.description = description;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

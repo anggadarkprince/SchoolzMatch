@@ -16,11 +16,16 @@ public class ProfileRepository {
     private DBHelper dbHelper;
     private SQLiteDatabase mDatabase;
 
-    public ProfileRepository(Context context){
+    public ProfileRepository(Context context) {
         dbHelper = new DBHelper(context);
     }
 
-    public Map<String, Object> retrieve(){
+    /**
+     * Retrieve all pairs data object and wrap into HashMap.
+     *
+     * @return key-value collection inside HashMap
+     */
+    public Map<String, Object> retrieve() {
         mDatabase = dbHelper.getReadableDatabase();
 
         String[] projection = {Profile.KEY, Profile.VALUE};
@@ -41,7 +46,13 @@ public class ProfileRepository {
         return profiles;
     }
 
-    public Object retrieveValueOf(String key){
+    /**
+     * Retrieve single data by key.
+     *
+     * @param key of data identity
+     * @return Object
+     */
+    public Object retrieveValueOf(String key) {
         Map<String, Object> profiles = retrieve();
         if (profiles.containsKey(key)) {
             return profiles.get(key);
@@ -49,11 +60,25 @@ public class ProfileRepository {
         return null;
     }
 
-    public boolean store(Profile profile){
+    /**
+     * Store data by passing profile object
+     *
+     * @param profile object
+     * @return status of storing into persistent storage
+     */
+    public boolean store(Profile profile) {
         return store(profile.getKey(), profile.getValue());
     }
 
-    public boolean store(String key, Object value){
+    /**
+     * Store data by individual pair value instead profile object.
+     * Check if data new or the old data just need to be updated.
+     *
+     * @param key   of profile data
+     * @param value of profile data
+     * @return status of storing into persistent storage
+     */
+    public boolean store(String key, Object value) {
         Profile profile = new Profile(key, value);
 
         mDatabase = dbHelper.getReadableDatabase();

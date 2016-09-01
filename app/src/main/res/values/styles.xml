@@ -28,7 +28,7 @@
 
     <style name="CustomBetterPickerTheme" parent="BetterPickersDialogFragment">
         <item name="bpDialogBackground">@color/colorPrimary</item>
-        <item name="bpButtonBackground">@color/colorBackground</item>
+        <item name="bpButtonBackground">@color/colorPrimaryDark</item>
     </style>
 
 </resources>

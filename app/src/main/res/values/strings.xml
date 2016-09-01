@@ -4,6 +4,8 @@
     <string name="app_about">About</string>
     <string name="app_profile">Profile</string>
     <string name="app_alarm">Alarm</string>
+    <string name="app_bell">School Time</string>
+    <string name="app_schedule">Schedule</string>
 
     <string name="cd_wave">cd_wave</string>
     <string name="cd_logo">Schoolz Logo</string>
@@ -13,6 +15,8 @@
     <string name="button_about">ABOUT</string>
     <string name="button_exit">EXIT APP</string>
     <string name="button_save">SAVE</string>
+    <string name="button_detail">DETAIL</string>
+    <string name="button_turn_off">TURN OFF</string>
 
     <string name="prompt_grade">Your class grade</string>
     <string name="prompt_school">Your school name</string>
@@ -37,51 +41,59 @@
     <string name="label_about_website">website angga-ari.com</string>
     <string name="label_about_third_party">Third-party licence</string>
     <string name="label_about_library">Free open source project that have contributed to Schoolz Match</string>
+
     <string name="label_library_better_pickers">BetterPickers</string>
+    <string name="label_library_butter_knife">Butter Knife</string>
+    <string name="label_library_joda_time">Joda Time</string>
     <string name="label_library_better_pickers_desc">Version: 1.5.2\nCopyright 2013 Derek Braymayer\nApache licence 2.0</string>
+    <string name="label_library_butter_knife_desc">Version: 8.4.0\nCopyright 2016 Jake Wharton</string>
+    <string name="label_library_joda_time_desc">Version: 2.9.4\nCopyright 2016 Joda</string>
+
     <string name="label_next_task">NEXT TASK</string>
-    <string name="button_turn_off">TURN OFF</string>
     <string name="label_reminder">REMINDER</string>
-    <string name="app_schedule">Schedule</string>
+    <string name="label_arrival_before">BEFORE</string>
+
     <string name="label_general">General</string>
     <string name="label_school_time">School Time</string>
-    <string name="label_desc_school_time">Your school daily time schedule</string>
-    <string name="button_detail">DETAIL</string>
     <string name="label_arrival_expectation">Arrival Expectation</string>
-    <string name="label_desc_arrival_expectation">Arrive before bell ringing is better</string>
-    <string name="label_arrival_before">BEFORE</string>
     <string name="label_activities">Activities</string>
+    <string name="label_school_distance">School Distance</string>
+    <string name="label_estimation">Estimation</string>
+
+    <string name="label_desc_school_time">Your school daily time schedule</string>
+    <string name="label_desc_arrival_expectation">Arrive before bell ringing is better</string>
+    <string name="label_desc_school_distance">Distance from home to school</string>
+
     <string name="label_act_homework">1. Doing Homework</string>
     <string name="label_act_desc_homework">Preparing task or school project</string>
-    <string name="label_before_sleep">BEFORE SLEEP</string>
     <string name="label_act_wake_up">2. Wake Up</string>
     <string name="label_act_desc_wake_up">Get up in the morning</string>
-    <string name="label_morning">MORNING</string>
     <string name="label_act_pray">3. Pray</string>
     <string name="label_act_desc_pray">Shalat for moslem</string>
-    <string name="label_for_moslem">FOR MOSLEM</string>
     <string name="label_act_workout">4. Workout</string>
     <string name="label_act_desc_workout">Doing exercises or light sport</string>
-    <string name="label_exercise">EXERCISE</string>
     <string name="label_act_take_a_bath">5. Take a bath</string>
     <string name="label_act_desc_take_a_bath">Shower and take a bath</string>
-    <string name="label_clean_and_fresh">CLEAN AND FRESH</string>
     <string name="label_act_breakfast">6. Breakfast</string>
     <string name="label_act_desc_breakfast">Shower and take a bath</string>
-    <string name="label_fill_energy">FILL ENERGY</string>
-    <string name="label_estimation">Estimation</string>
     <string name="label_act_go_to_school">7. Go to school</string>
     <string name="label_act_desc_go_to_school">Time to arrive at school</string>
+
+    <string name="label_for_moslem">FOR MOSLEM</string>
+    <string name="label_before_sleep">BEFORE SLEEP</string>
+    <string name="label_morning">MORNING</string>
+    <string name="label_exercise">EXERCISE</string>
+    <string name="label_clean_and_fresh">CLEAN AND FRESH</string>
+    <string name="label_fill_energy">FILL ENERGY</string>
     <string name="label_from_home">FROM HOME</string>
-    <string name="label_school_distance">School Distance</string>
-    <string name="label_desc_school_distance">Distance from home to school</string>
-    <string name="app_bell">School Time</string>
+
     <string name="label_monday">Monday</string>
     <string name="label_tuesday">Tuesday</string>
     <string name="label_wednesday">Wednesday</string>
     <string name="label_thursday">Thursday</string>
     <string name="label_friday">Friday</string>
     <string name="label_saturday">Saturday</string>
+
     <string name="time_picker_result_value">%1$s:%2$s</string>
     <string name="arrival_expectation_value">%1$s Minute%2$s</string>
     <string name="school_distance_value">%1$s KM</string>

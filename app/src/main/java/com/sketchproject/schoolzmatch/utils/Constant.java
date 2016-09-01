@@ -5,7 +5,9 @@ package com.sketchproject.schoolzmatch.utils;
  * Created by Angga on 31/08/2016 15.50.
  */
 public class Constant {
-    public static final String DAY_MONDAY = "sunday";
+    public static final String DAY_OFF = "off";
+    public static final String DAY_SUNDAY = "sunday";
+    public static final String DAY_MONDAY = "monday";
     public static final String DAY_TUESDAY = "tuesday";
     public static final String DAY_WEDNESDAY = "wednesday";
     public static final String DAY_THURSDAY = "thursday";
@@ -29,5 +31,10 @@ public class Constant {
     public static final String ACT_SHOWER = "Take a bath";
     public static final String ACT_BREAKFAST = "Breakfast";
     public static final String ACT_SCHOOL = "Go to School";
+
+    public static final String HOUR = "hour";
+    public static final String MINUTE = "minute";
+
+    public static final int HOUR_DAY_CHANGE = 15;
 
 }

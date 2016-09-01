@@ -13,10 +13,10 @@ import android.widget.Toast;
 import com.codetroopers.betterpickers.timepicker.TimePickerBuilder;
 import com.codetroopers.betterpickers.timepicker.TimePickerDialogFragment;
 import com.sketchproject.schoolzmatch.database.ProfileRepository;
+import com.sketchproject.schoolzmatch.utils.AlarmClock;
 import com.sketchproject.schoolzmatch.utils.Constant;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -104,6 +104,8 @@ public class BellActivity extends AppCompatActivity implements TimePickerDialogF
         profileRepository.store(Constant.DAY_FRIDAY, schoolTimes.get(Constant.DAY_FRIDAY));
         profileRepository.store(Constant.DAY_SATURDAY, schoolTimes.get(Constant.DAY_SATURDAY));
 
+        AlarmClock.updateAlarmClock(getApplicationContext());
+
         Toast toast = Toast.makeText(buttonSave.getContext(), "School time has been updated", Toast.LENGTH_LONG);
         View view = toast.getView();
         view.setBackgroundResource(R.color.colorSuccess);
@@ -154,26 +156,26 @@ public class BellActivity extends AppCompatActivity implements TimePickerDialogF
 
     @Override
     public void onDialogTimeSet(int reference, int hourOfDay, int minute) {
-        String pickedTime = formatTime(hourOfDay, minute);
+        String pickedTime = AlarmClock.formatTime(BellActivity.this, hourOfDay, minute);
         switch (reference) {
             case Constant.NUM_DAY_MONDAY:
                 monday.setText(pickedTime);
                 schoolTimes.put(Constant.DAY_MONDAY, pickedTime);
                 break;
             case Constant.NUM_DAY_TUESDAY:
-                tuesday.setText(formatTime(hourOfDay, minute));
+                tuesday.setText(pickedTime);
                 schoolTimes.put(Constant.DAY_TUESDAY, pickedTime);
                 break;
             case Constant.NUM_DAY_WEDNESDAY:
-                wednesday.setText(formatTime(hourOfDay, minute));
+                wednesday.setText(pickedTime);
                 schoolTimes.put(Constant.DAY_WEDNESDAY, pickedTime);
                 break;
             case Constant.NUM_DAY_THURSDAY:
-                thursday.setText(formatTime(hourOfDay, minute));
+                thursday.setText(pickedTime);
                 schoolTimes.put(Constant.DAY_THURSDAY, pickedTime);
                 break;
             case Constant.NUM_DAY_FRIDAY:
-                friday.setText(formatTime(hourOfDay, minute));
+                friday.setText(pickedTime);
                 schoolTimes.put(Constant.DAY_FRIDAY, pickedTime);
                 break;
             case Constant.NUM_DAY_SATURDAY:
@@ -181,19 +183,5 @@ public class BellActivity extends AppCompatActivity implements TimePickerDialogF
                 schoolTimes.put(Constant.DAY_SATURDAY, pickedTime);
                 break;
         }
-    }
-
-    /**
-     * Format string of time.
-     * @param hourOfDay hour
-     * @param minute minute
-     * @return String time format
-     */
-    private String formatTime(int hourOfDay, int minute) {
-        return getString(
-                R.string.time_picker_result_value,
-                String.format(Locale.getDefault(), "%02d", hourOfDay),
-                String.format(Locale.getDefault(), "%02d", minute)
-        );
     }
 }

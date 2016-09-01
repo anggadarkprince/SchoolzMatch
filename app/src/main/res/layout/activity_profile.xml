@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLight"
     tools:context="com.sketchproject.schoolzmatch.ProfileActivity">
 
     <LinearLayout
@@ -35,10 +34,10 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
-            android:textSize="16sp"
             android:gravity="top"
             android:hint="@string/prompt_name"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -52,10 +51,10 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
-            android:textSize="16sp"
             android:gravity="top"
             android:hint="@string/prompt_address"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -110,10 +109,10 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
-            android:textSize="16sp"
             android:gravity="top"
             android:hint="@string/prompt_school"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -127,17 +126,17 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="25dp"
-            android:textSize="16sp"
             android:gravity="top"
             android:hint="@string/prompt_grade"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/buttonSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_filled"
             android:layout_marginBottom="30dp"
+            android:background="@drawable/button_filled"
             android:text="@string/button_save"
             android:textColor="@color/colorLight" />
     </LinearLayout>

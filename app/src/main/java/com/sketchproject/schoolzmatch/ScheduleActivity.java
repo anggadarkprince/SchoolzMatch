@@ -17,11 +17,11 @@ import com.sketchproject.schoolzmatch.database.Profile;
 import com.sketchproject.schoolzmatch.database.ProfileRepository;
 import com.sketchproject.schoolzmatch.database.Schedule;
 import com.sketchproject.schoolzmatch.database.ScheduleRepository;
+import com.sketchproject.schoolzmatch.utils.AlarmClock;
 import com.sketchproject.schoolzmatch.utils.Constant;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -101,6 +101,8 @@ public class ScheduleActivity extends AppCompatActivity implements
         profileRepository.store(new Profile(Constant.ARRIVE_BEFORE, arriveBefore));
         profileRepository.store(new Profile(Constant.SCHOOL_DISTANCE, distance));
 
+        AlarmClock.updateAlarmClock(getApplicationContext());
+
         Snackbar snackbar = Snackbar.make(buttonSave, "Schedule data has been updated", Snackbar.LENGTH_LONG);
         snackbar.setActionTextColor(ContextCompat.getColor(buttonSave.getContext(), R.color.colorLight));
         snackbar.setAction("OK", new View.OnClickListener() {
@@ -131,7 +133,7 @@ public class ScheduleActivity extends AppCompatActivity implements
                 .setMaxNumber(new BigDecimal(100))
                 .setMinNumber(new BigDecimal(0))
                 .setDecimalVisibility(View.VISIBLE)
-                .setReference(BUTTON_PICK_EXPECTATION)
+                .setReference(BUTTON_PICK_DISTANCE)
                 .setLabelText("KM")
                 .show();
     }
@@ -199,7 +201,7 @@ public class ScheduleActivity extends AppCompatActivity implements
         arriveBefore = Integer.parseInt(String.valueOf(profileRepository.retrieveValueOf(Constant.ARRIVE_BEFORE)));
         onDialogNumberSet(BUTTON_PICK_EXPECTATION, new BigInteger(String.valueOf(arriveBefore)), 0, false, null);
         distance = Float.parseFloat(String.valueOf(profileRepository.retrieveValueOf(Constant.SCHOOL_DISTANCE)));
-        onDialogNumberSet(BUTTON_PICK_DISTANCE, new BigInteger("0"), distance, false, null);
+        onDialogNumberSet(BUTTON_PICK_DISTANCE, new BigInteger("0"), 0, false, new BigDecimal(distance));
 
         homeworkDuration = scheduleRepository.findData(Constant.ACT_HOMEWORK);
         wakeupDuration = scheduleRepository.findData(Constant.ACT_WAKEUP);
@@ -209,13 +211,13 @@ public class ScheduleActivity extends AppCompatActivity implements
         breakfastDuration = scheduleRepository.findData(Constant.ACT_BREAKFAST);
         schoolDuration = scheduleRepository.findData(Constant.ACT_SCHOOL);
 
-        homework.setText(formatHHmm(homeworkDuration.getTime()));
-        wakeup.setText(formatHHmm(wakeupDuration.getTime()));
-        pray.setText(formatHHmm(prayDuration.getTime()));
-        workout.setText(formatHHmm(workoutDuration.getTime()));
-        shower.setText(formatHHmm(showerDuration.getTime()));
-        breakfast.setText(formatHHmm(breakfastDuration.getTime()));
-        school.setText(formatHHmm(schoolDuration.getTime()));
+        homework.setText(AlarmClock.formatHHmm(homeworkDuration.getTime()));
+        wakeup.setText(AlarmClock.formatHHmm(wakeupDuration.getTime()));
+        pray.setText(AlarmClock.formatHHmm(prayDuration.getTime()));
+        workout.setText(AlarmClock.formatHHmm(workoutDuration.getTime()));
+        shower.setText(AlarmClock.formatHHmm(showerDuration.getTime()));
+        breakfast.setText(AlarmClock.formatHHmm(breakfastDuration.getTime()));
+        school.setText(AlarmClock.formatHHmm(schoolDuration.getTime()));
     }
 
     @Override
@@ -225,8 +227,8 @@ public class ScheduleActivity extends AppCompatActivity implements
             arrivalExpectation.setText(getString(R.string.arrival_expectation_value, String.valueOf(number), es));
             arriveBefore = Integer.parseInt(String.valueOf(number));
         } else if (reference == BUTTON_PICK_DISTANCE) {
-            schoolDistance.setText(getString(R.string.school_distance_value, decimal));
-            distance = Float.parseFloat(String.valueOf(decimal));
+            schoolDistance.setText(getString(R.string.school_distance_value, fullNumber));
+            distance = Float.parseFloat(String.valueOf(fullNumber));
         }
     }
 
@@ -234,57 +236,33 @@ public class ScheduleActivity extends AppCompatActivity implements
     public void onDialogHmsSet(int reference, boolean isNegative, int hours, int minutes, int seconds) {
         switch (reference) {
             case BUTTON_PICK_HOMEWORK:
-                homeworkDuration.setTime(formatTime(hours, minutes));
-                homework.setText(formatDuration(hours, minutes));
+                homeworkDuration.setTime(AlarmClock.formatTime(ScheduleActivity.this, hours, minutes));
+                homework.setText(AlarmClock.formatDuration(hours, minutes));
                 break;
             case BUTTON_PICK_WAKEUP:
-                wakeupDuration.setTime(formatTime(hours, minutes));
-                wakeup.setText(formatDuration(hours, minutes));
+                wakeupDuration.setTime(AlarmClock.formatTime(ScheduleActivity.this, hours, minutes));
+                wakeup.setText(AlarmClock.formatDuration(hours, minutes));
                 break;
             case BUTTON_PICK_PRAY:
-                prayDuration.setTime(formatTime(hours, minutes));
-                pray.setText(formatDuration(hours, minutes));
+                prayDuration.setTime(AlarmClock.formatTime(ScheduleActivity.this, hours, minutes));
+                pray.setText(AlarmClock.formatDuration(hours, minutes));
                 break;
             case BUTTON_PICK_WORKOUT:
-                workoutDuration.setTime(formatTime(hours, minutes));
-                workout.setText(formatDuration(hours, minutes));
+                workoutDuration.setTime(AlarmClock.formatTime(ScheduleActivity.this, hours, minutes));
+                workout.setText(AlarmClock.formatDuration(hours, minutes));
                 break;
             case BUTTON_PICK_SHOWER:
-                showerDuration.setTime(formatTime(hours, minutes));
-                shower.setText(formatDuration(hours, minutes));
+                showerDuration.setTime(AlarmClock.formatTime(ScheduleActivity.this, hours, minutes));
+                shower.setText(AlarmClock.formatDuration(hours, minutes));
                 break;
             case BUTTON_PICK_BREAKFAST:
-                breakfastDuration.setTime(formatTime(hours, minutes));
-                breakfast.setText(formatDuration(hours, minutes));
+                breakfastDuration.setTime(AlarmClock.formatTime(ScheduleActivity.this, hours, minutes));
+                breakfast.setText(AlarmClock.formatDuration(hours, minutes));
                 break;
             case BUTTON_PICK_SCHOOL:
-                schoolDuration.setTime(formatTime(hours, minutes));
-                school.setText(formatDuration(hours, minutes));
+                schoolDuration.setTime(AlarmClock.formatTime(ScheduleActivity.this, hours, minutes));
+                school.setText(AlarmClock.formatDuration(hours, minutes));
                 break;
         }
-    }
-
-    private String formatHHmm(String time) {
-        String[] duration = time.split(":");
-        return formatDuration(Integer.parseInt(duration[0]), Integer.parseInt(duration[1]));
-    }
-
-    private String formatDuration(int hours, int minute) {
-        if (hours == 0 && minute > 0) {
-            String es = minute > 1 ? "s" : "";
-            return minute + " Minute" + es;
-        } else if (hours > 0 && minute == 0) {
-            return hours + " Hours";
-        } else {
-            return hours + " h : " + minute + " m";
-        }
-    }
-
-    private String formatTime(int hourOfDay, int minute) {
-        return getString(
-                R.string.time_picker_result_value,
-                String.format(Locale.getDefault(), "%02d", hourOfDay),
-                String.format(Locale.getDefault(), "%02d", minute)
-        );
     }
 }

@@ -1,8 +1,5 @@
 package com.sketchproject.schoolzmatch.database;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Sketch Project Studio
  * Created by Angga on 30/08/2016 12.58.

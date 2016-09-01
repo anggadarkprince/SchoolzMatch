@@ -21,6 +21,13 @@ public class ScheduleRepository {
         dbHelper = new DBHelper(context);
     }
 
+    /**
+     * Retrieve all schedule from monday to saturday,
+     * wrap data into Schedule POJO inside Array list.
+     *
+     * @return List of schedules
+     * @throws ParseException
+     */
     public List<Schedule> retrieve() throws ParseException {
         mDatabase = dbHelper.getReadableDatabase();
 
@@ -48,6 +55,13 @@ public class ScheduleRepository {
         return scheduleList;
     }
 
+    /**
+     * Find data by label not ID, trace schedule
+     * by label condition and wrap into Schedule POJO.
+     *
+     * @param label of schedule
+     * @return Schedule data
+     */
     public Schedule findData(String label) {
         mDatabase = dbHelper.getReadableDatabase();
 
@@ -71,26 +85,41 @@ public class ScheduleRepository {
         return schedule;
     }
 
+    /**
+     * Store schedule by passing schedule object. Check if new data or
+     * the old data just need to be update.
+     *
+     * @param schedule object
+     * @return status of storing data into persistent storage
+     */
     public boolean store(Schedule schedule) {
-        return store(schedule.getLabel(), schedule.getDescription(), schedule.getTime());
+        return store(schedule.getId(), schedule.getLabel(), schedule.getDescription(), schedule.getTime());
     }
 
-    public boolean store(String label, String description, String time) {
-        Schedule schedule = new Schedule(label, description, time);
-
+    /**
+     * Store data with data instead object of Schedule. Check if new data or
+     * the old data just need to be update.
+     *
+     * @param id          of schedule
+     * @param label       title of schedule
+     * @param description long information about schedule
+     * @param time        the duration of activity
+     * @return status of storing data into persistent storage
+     */
+    public boolean store(int id, String label, String description, String time) {
         mDatabase = dbHelper.getReadableDatabase();
 
         String[] projection = {Schedule.ID};
         String selection = Schedule.ID + " = ?";
-        String[] selectionArgs = {String.valueOf(schedule.getId())};
+        String[] selectionArgs = {String.valueOf(id)};
         Cursor cursor = mDatabase.query(Schedule.TABLE, projection, selection, selectionArgs, null, null, null);
 
         mDatabase = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(Schedule.LABEL, schedule.getLabel());
-        values.put(Schedule.DESCRIPTION, schedule.getDescription());
-        values.put(Schedule.TIME, schedule.getTime());
+        values.put(Schedule.LABEL, label);
+        values.put(Schedule.DESCRIPTION, description);
+        values.put(Schedule.TIME, time);
 
         if (cursor.moveToFirst()) {
             // update

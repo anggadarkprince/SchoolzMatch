@@ -100,6 +100,40 @@
             android:text="@string/label_library_better_pickers_desc"
             android:textColor="@color/colorLight" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/label_library_butter_knife"
+            android:textColor="@color/colorLight"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:alpha="0.8"
+            android:text="@string/label_library_butter_knife_desc"
+            android:textColor="@color/colorLight" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/label_library_joda_time"
+            android:textColor="@color/colorLight"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:alpha="0.8"
+            android:text="@string/label_library_joda_time_desc"
+            android:textColor="@color/colorLight" />
+
     </LinearLayout>
 </ScrollView>
 

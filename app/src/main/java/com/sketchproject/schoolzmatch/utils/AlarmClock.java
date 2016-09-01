@@ -1,24 +1,38 @@
 package com.sketchproject.schoolzmatch.utils;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.os.SystemClock;
 import android.util.Log;
 
 import com.sketchproject.schoolzmatch.R;
 import com.sketchproject.schoolzmatch.database.ProfileRepository;
+import com.sketchproject.schoolzmatch.database.Schedule;
 import com.sketchproject.schoolzmatch.database.ScheduleRepository;
+import com.sketchproject.schoolzmatch.modules.AlarmReceiver;
 
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Sketch Project Studio
  * Created by Angga on 01/09/2016 07.58.
  */
 public class AlarmClock {
+    private static AlarmManager alarmManager;
+    private static AlarmManager alarmManagerRecheck;
+    private static PendingIntent pendingIntentRecheck;
+    private static ArrayList<PendingIntent> intentArray;
+
     public static int bellHour = 0;
     public static int bellMinute = 0;
 
@@ -55,6 +69,7 @@ public class AlarmClock {
      * 4. If today is not day off or bellRing is not null then populate all schedule or activities duration.
      * 5. Trace the alarm clock by subtracting from bell ringing time to last activity (doing homework)
      * 6. Log the result.
+     *
      * @param context application context
      */
     public static void updateAlarmClock(Context context) {
@@ -128,7 +143,9 @@ public class AlarmClock {
         if (bellRing != null && !dayName.equals(Constant.DAY_OFF)) {
             Log.i("Schedule", "Schedule today: " + dayName);
 
-            DateTime bellRinging = new DateTime(2016, 8, 10, bellRing.get(Constant.HOUR), bellRing.get(Constant.MINUTE));
+            DateTime bellRinging = new DateTime()
+                    .withHourOfDay(bellRing.get(Constant.HOUR))
+                    .withMinuteOfHour(bellRing.get(Constant.MINUTE));
             AlarmClock.bellHour = breakHHmm(bellRinging.toString("HH:mm")).get(Constant.HOUR);
             AlarmClock.bellMinute = breakHHmm(bellRinging.toString("HH:mm")).get(Constant.MINUTE);
             Log.i("Schedule", "Bell time " + bellRinging.toString("HH:mm"));
@@ -192,13 +209,158 @@ public class AlarmClock {
             Log.i("Schedule Check", "Pray " + AlarmClock.prayHour + " " + AlarmClock.prayMinute);
             Log.i("Schedule Check", "Sleep " + AlarmClock.wakeupHour + " " + AlarmClock.wakeupMinute);
             Log.i("Schedule Check", "Doing homework " + AlarmClock.homeworkHour + " " + AlarmClock.homeworkMinute);
+
+            setupAlarm(context);
+        } else {
+            cancelAlarms();
         }
     }
 
     /**
-     * Retrieve single activity by label and break the duration into pair key-value format.
+     * Run alarm in background at Constant.HOUR_DAY_CHANGE + 1 and repeat each 6 hours
+     *
      * @param context application context
-     * @param label activity label
+     */
+    public static void setupAlarmChecker(Context context) {
+        if(alarmManagerRecheck != null){
+            alarmManagerRecheck.cancel(pendingIntentRecheck);
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, Constant.HOUR_DAY_CHANGE + 1);
+
+        alarmManagerRecheck = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent receiverIntent = new Intent(context, AlarmReceiver.class);
+        receiverIntent.putExtra(Schedule.ID, Constant.CHECKER_ID);
+        pendingIntentRecheck = PendingIntent.getBroadcast(context, Constant.CHECKER_ID, receiverIntent, 0);
+        alarmManagerRecheck.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, pendingIntentRecheck);
+    }
+
+    /**
+     * Setup alarm from current setting.
+     *
+     * @param context application context
+     */
+    private static void setupAlarm(Context context) {
+        cancelAlarms();
+
+        alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        intentArray = new ArrayList<>();
+
+        ScheduleRepository scheduleRepository = new ScheduleRepository(context);
+        List<Schedule> schedules = scheduleRepository.retrieve();
+
+        for (int i = 0; i < schedules.size(); i++) {
+            Schedule schedule = schedules.get(i);
+            Intent receiverIntent = new Intent(context, AlarmReceiver.class);
+            receiverIntent.putExtra(Schedule.ID, schedule.getId());
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, schedule.getId(), receiverIntent, 0);
+            //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, getMillisTime(schedule), AlarmManager.INTERVAL_DAY, pendingIntent);
+            intentArray.add(pendingIntent);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, getMillisTime(schedule), pendingIntent);
+
+            Log.i("Schedule Alarm", "Alarm " + schedule.getLabel() + " ID " + String.valueOf(schedule.getId()));
+        }
+    }
+
+    /**
+     * Cancel single alarm
+     *
+     * @param id of alarm schedule
+     */
+    public static void cancelAlarm(int id) {
+        if (alarmManager != null && intentArray != null) {
+            for (int i = 0; i < intentArray.size(); i++) {
+                if (i == id - 1) {
+                    alarmManager.cancel(intentArray.get(i));
+                    break;
+                }
+            }
+        }
+        if (AlarmReceiver.ringtone != null) {
+            AlarmReceiver.ringtone.stop();
+        }
+    }
+
+    /**
+     * Cancel all alarms and stop ringtone.
+     */
+    public static void cancelAlarms() {
+        if (alarmManager != null && intentArray != null) {
+            for (int i = 0; i < intentArray.size(); i++) {
+                alarmManager.cancel(intentArray.get(i));
+            }
+        }
+        if (AlarmReceiver.ringtone != null) {
+            AlarmReceiver.ringtone.stop();
+        }
+    }
+
+    /**
+     * Get millis from current alarm schedule.
+     *
+     * @param schedule current alarm schedule
+     * @return millis of time
+     */
+    private static long getMillisTime(Schedule schedule) {
+        int timeHour = 0;
+        int timeMinute = 0;
+        switch (schedule.getLabel()) {
+            case Constant.ACT_HOMEWORK:
+                timeHour = homeworkHour;
+                timeMinute = homeworkMinute;
+                Log.i("Schedule homework", timeHour + ":" + timeMinute);
+                break;
+            case Constant.ACT_WAKEUP:
+                timeHour = wakeupHour;
+                timeMinute = wakeupMinute;
+                Log.i("Schedule sleep", timeHour + ":" + timeMinute);
+                break;
+            case Constant.ACT_PRAY:
+                timeHour = prayHour;
+                timeMinute = prayMinute;
+                Log.i("Schedule pray", timeHour + ":" + timeMinute);
+                break;
+            case Constant.ACT_WORKOUT:
+                timeHour = workoutHour;
+                timeMinute = workoutMinute;
+                Log.i("Schedule workout", timeHour + ":" + timeMinute);
+                break;
+            case Constant.ACT_SHOWER:
+                timeHour = showerHour;
+                timeMinute = showerMinute;
+                Log.i("Schedule shower", timeHour + ":" + timeMinute);
+                break;
+            case Constant.ACT_BREAKFAST:
+                timeHour = breakfastHour;
+                timeMinute = breakfastMinute;
+                Log.i("Schedule breakfast", timeHour + ":" + timeMinute);
+                break;
+            case Constant.ACT_SCHOOL:
+                timeHour = schoolHour;
+                timeMinute = schoolMinute;
+                Log.i("Schedule school", timeHour + ":" + timeMinute);
+                break;
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, timeHour);
+        calendar.set(Calendar.MINUTE, timeMinute);
+
+        DateTime alarm = new DateTime()
+                .withHourOfDay(timeHour)
+                .withMinuteOfHour(timeMinute);
+        Log.i("Schedule", String.valueOf(alarm.getHourOfDay()) + ":" + String.valueOf(alarm.getMinuteOfHour()));
+        long millis = alarm.getMillis(); //calendar.getTimeInMillis();
+        Log.i("Schedule back", new DateTime(millis).toString("HH:mm"));
+        return calendar.getTimeInMillis();
+    }
+
+    /**
+     * Retrieve single activity by label and break the duration into pair key-value format.
+     *
+     * @param context application context
+     * @param label   activity label
      * @return pair key-value of hour and minute
      */
     public static HashMap<String, Integer> getActivityDuration(Context context, String label) {
@@ -212,7 +374,8 @@ public class AlarmClock {
      * Break HH:mm format string or object into pair key-value format in HashMap.
      * Input Eg. 1:30
      * Output Eg.   hhmm.get("hour") = 1
-     *              hhmm.get("minute") = 30
+     * hhmm.get("minute") = 30
+     *
      * @param time string with HH:mm format
      * @return pair key-value of hour and minute
      */
@@ -229,6 +392,7 @@ public class AlarmClock {
     /**
      * Break string HH:mm into flexible time format.
      * Input Eg. 1:30, 1:00, 0:23
+     *
      * @param time string HH:mm format
      * @return string with flexible format
      */
@@ -241,9 +405,10 @@ public class AlarmClock {
      * Format input hour and minute into flexible long string.
      * input Eg. (hour = 1 and minute = 30) or (hour = 1 and minute = 0) or (hour = 0 and minute = 23)
      * output Eg.   1 h : 30 m  if hour > 0 and minute > 0
-     *              1 Hours     if minute = 0
-     *              23 Minutes  if hour = 0
-     * @param hours input hour
+     * 1 Hours     if minute = 0
+     * 23 Minutes  if hour = 0
+     *
+     * @param hours  input hour
      * @param minute input minute
      * @return string with flexible format
      */
@@ -262,9 +427,10 @@ public class AlarmClock {
      * Format inputs hour and minute into HH:mm
      * Input Eg. hour = 2 and minute = 30
      * Output Eg. 02:30
-     * @param context application context
+     *
+     * @param context   application context
      * @param hourOfDay input hour
-     * @param minute input minute
+     * @param minute    input minute
      * @return string of HH:mm format
      */
     public static String formatTime(Context context, int hourOfDay, int minute) {

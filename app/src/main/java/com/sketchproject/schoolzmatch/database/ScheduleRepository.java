@@ -26,9 +26,8 @@ public class ScheduleRepository {
      * wrap data into Schedule POJO inside Array list.
      *
      * @return List of schedules
-     * @throws ParseException
      */
-    public List<Schedule> retrieve() throws ParseException {
+    public List<Schedule> retrieve() {
         mDatabase = dbHelper.getReadableDatabase();
 
         String[] projection = {Schedule.ID, Schedule.LABEL, Schedule.DESCRIPTION, Schedule.TIME};

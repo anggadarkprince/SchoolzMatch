@@ -25,7 +25,7 @@ public class Constant {
     public static final String SCHOOL_DISTANCE = "distance";
 
     public static final String ACT_HOMEWORK = "Homework";
-    public static final String ACT_WAKEUP = "Wake up";
+    public static final String ACT_WAKEUP = "Sleep";
     public static final String ACT_PRAY = "Pray";
     public static final String ACT_WORKOUT = "Workout";
     public static final String ACT_SHOWER = "Take a bath";
@@ -36,5 +36,9 @@ public class Constant {
     public static final String MINUTE = "minute";
 
     public static final int HOUR_DAY_CHANGE = 15;
+    public static final int CHECKER_ID = 99;
 
+    public static final String ALARM_MESSAGE = "alarmMessage";
+    public static final String ALARM_NEXT = "alarmNext";
+    public static final String ALARM_ID = "alarmID";
 }

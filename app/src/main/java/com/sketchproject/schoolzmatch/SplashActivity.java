@@ -2,9 +2,8 @@ package com.sketchproject.schoolzmatch;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Handler;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 
 import com.sketchproject.schoolzmatch.database.ProfileRepository;
 import com.sketchproject.schoolzmatch.database.Schedule;
@@ -83,40 +82,41 @@ public class SplashActivity extends Activity {
         ScheduleRepository scheduleRepository = new ScheduleRepository(getApplicationContext());
 
         // set default homework duration
-        if(scheduleRepository.findData(Constant.ACT_HOMEWORK) == null){
+        if (scheduleRepository.findData(Constant.ACT_HOMEWORK) == null) {
             scheduleRepository.store(new Schedule(Constant.ACT_HOMEWORK, "Doing homework before sleep", "01:00"));
         }
 
         // set default sleep duration
-        if(scheduleRepository.findData(Constant.ACT_WAKEUP) == null){
+        if (scheduleRepository.findData(Constant.ACT_WAKEUP) == null) {
             scheduleRepository.store(new Schedule(Constant.ACT_WAKEUP, "Rest of the day", "08:00"));
         }
 
         // set default pray duration
-        if(scheduleRepository.findData(Constant.ACT_PRAY) == null){
+        if (scheduleRepository.findData(Constant.ACT_PRAY) == null) {
             scheduleRepository.store(new Schedule(Constant.ACT_PRAY, "Pray and shalat for moslem", "00:10"));
         }
 
         // set default workout duration
-        if(scheduleRepository.findData(Constant.ACT_WORKOUT) == null){
+        if (scheduleRepository.findData(Constant.ACT_WORKOUT) == null) {
             scheduleRepository.store(new Schedule(Constant.ACT_WORKOUT, "Exercise and light sport", "00:15"));
         }
 
         // set default sleep duration
-        if(scheduleRepository.findData(Constant.ACT_SHOWER) == null){
+        if (scheduleRepository.findData(Constant.ACT_SHOWER) == null) {
             scheduleRepository.store(new Schedule(Constant.ACT_SHOWER, "Take a bath and cleaning body", "00:15"));
         }
 
         // set default breakfast duration
-        if(scheduleRepository.findData(Constant.ACT_BREAKFAST) == null){
+        if (scheduleRepository.findData(Constant.ACT_BREAKFAST) == null) {
             scheduleRepository.store(new Schedule(Constant.ACT_BREAKFAST, "Fill my energy with food", "00:15"));
         }
 
         // set default school duration
-        if(scheduleRepository.findData(Constant.ACT_SCHOOL) == null){
+        if (scheduleRepository.findData(Constant.ACT_SCHOOL) == null) {
             scheduleRepository.store(new Schedule(Constant.ACT_SCHOOL, "Go to my school", "00:20"));
         }
 
         AlarmClock.updateAlarmClock(getApplicationContext());
+        AlarmClock.setupAlarmChecker(getApplicationContext());
     }
 }

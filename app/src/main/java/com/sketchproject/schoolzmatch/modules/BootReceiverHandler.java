@@ -9,6 +9,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.sketchproject.schoolzmatch.MainActivity;
 import com.sketchproject.schoolzmatch.R;
+import com.sketchproject.schoolzmatch.utils.AlarmClock;
 
 /**
  * Sketch Project Studio
@@ -29,6 +30,8 @@ public class BootReceiverHandler extends BroadcastReceiver {
             PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(resultPendingIntent);
             notificationManager.notify(111, mBuilder.build());
+
+            AlarmClock.updateAlarmClock(context);
         }
     }
 }

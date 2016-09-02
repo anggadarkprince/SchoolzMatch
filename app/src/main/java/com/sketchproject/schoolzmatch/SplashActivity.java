@@ -8,6 +8,7 @@ import android.os.Handler;
 import com.sketchproject.schoolzmatch.database.ProfileRepository;
 import com.sketchproject.schoolzmatch.database.Schedule;
 import com.sketchproject.schoolzmatch.database.ScheduleRepository;
+import com.sketchproject.schoolzmatch.modules.AlarmReceiver;
 import com.sketchproject.schoolzmatch.utils.AlarmClock;
 import com.sketchproject.schoolzmatch.utils.Constant;
 
@@ -114,9 +115,12 @@ public class SplashActivity extends Activity {
         // set default school duration
         if (scheduleRepository.findData(Constant.ACT_SCHOOL) == null) {
             scheduleRepository.store(new Schedule(Constant.ACT_SCHOOL, "Go to my school", "00:20"));
+            AlarmClock.setupAlarmChecker(getApplicationContext());
         }
 
         AlarmClock.updateAlarmClock(getApplicationContext());
-        AlarmClock.setupAlarmChecker(getApplicationContext());
+        if (AlarmReceiver.mp != null) {
+            AlarmReceiver.mp.stop();
+        }
     }
 }

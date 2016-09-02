@@ -2,8 +2,7 @@ package com.sketchproject.schoolzmatch;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,6 +37,8 @@ public class AlarmActivity extends Activity {
         setContentView(R.layout.activity_alarm);
         ButterKnife.bind(this);
 
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         Bundle bundle = getIntent().getExtras();
         String message = bundle.getString(Constant.ALARM_MESSAGE);
         String next = bundle.getString(Constant.ALARM_NEXT);
@@ -45,13 +46,10 @@ public class AlarmActivity extends Activity {
 
         textActivity.setText(message);
         textNext.setText(next);
-
-        Animation waveAnimation = AnimationUtils.loadAnimation(this, R.anim.wave_anim);
-        waveAnimation.setRepeatCount(Animation.INFINITE);
-        wave.startAnimation(waveAnimation);
     }
 
     @Override
     public void onBackPressed() {
     }
+
 }

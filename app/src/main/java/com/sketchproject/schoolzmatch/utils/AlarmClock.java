@@ -233,7 +233,7 @@ public class AlarmClock {
         Intent receiverIntent = new Intent(context, AlarmReceiver.class);
         receiverIntent.putExtra(Schedule.ID, Constant.CHECKER_ID);
         pendingIntentRecheck = PendingIntent.getBroadcast(context, Constant.CHECKER_ID, receiverIntent, 0);
-        alarmManagerRecheck.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HOUR, pendingIntentRecheck);
+        alarmManagerRecheck.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntentRecheck);
     }
 
     /**
@@ -255,9 +255,8 @@ public class AlarmClock {
             Intent receiverIntent = new Intent(context, AlarmReceiver.class);
             receiverIntent.putExtra(Schedule.ID, schedule.getId());
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, schedule.getId(), receiverIntent, 0);
-            //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, getMillisTime(schedule), AlarmManager.INTERVAL_DAY, pendingIntent);
             intentArray.add(pendingIntent);
-            alarmManager.set(AlarmManager.RTC_WAKEUP, getMillisTime(schedule), pendingIntent);
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, getMillisTime(schedule), AlarmManager.INTERVAL_DAY, pendingIntent);
 
             Log.i("Schedule Alarm", "Alarm " + schedule.getLabel() + " ID " + String.valueOf(schedule.getId()));
         }
@@ -277,8 +276,8 @@ public class AlarmClock {
                 }
             }
         }
-        if (AlarmReceiver.ringtone != null) {
-            AlarmReceiver.ringtone.stop();
+        if (AlarmReceiver.mp != null) {
+            AlarmReceiver.mp.stop();
         }
     }
 
@@ -291,8 +290,8 @@ public class AlarmClock {
                 alarmManager.cancel(intentArray.get(i));
             }
         }
-        if (AlarmReceiver.ringtone != null) {
-            AlarmReceiver.ringtone.stop();
+        if (AlarmReceiver.mp != null) {
+            AlarmReceiver.mp.stop();
         }
     }
 
@@ -307,53 +306,51 @@ public class AlarmClock {
         int timeMinute = 0;
         switch (schedule.getLabel()) {
             case Constant.ACT_HOMEWORK:
-                timeHour = homeworkHour;
-                timeMinute = homeworkMinute;
+                timeHour = AlarmClock.homeworkHour;
+                timeMinute = AlarmClock.homeworkMinute;
                 Log.i("Schedule homework", timeHour + ":" + timeMinute);
                 break;
             case Constant.ACT_WAKEUP:
-                timeHour = wakeupHour;
-                timeMinute = wakeupMinute;
+                timeHour = AlarmClock.wakeupHour;
+                timeMinute = AlarmClock.wakeupMinute;
                 Log.i("Schedule sleep", timeHour + ":" + timeMinute);
                 break;
             case Constant.ACT_PRAY:
-                timeHour = prayHour;
-                timeMinute = prayMinute;
+                timeHour = AlarmClock.prayHour;
+                timeMinute = AlarmClock.prayMinute;
                 Log.i("Schedule pray", timeHour + ":" + timeMinute);
                 break;
             case Constant.ACT_WORKOUT:
-                timeHour = workoutHour;
-                timeMinute = workoutMinute;
+                timeHour = AlarmClock.workoutHour;
+                timeMinute = AlarmClock.workoutMinute;
                 Log.i("Schedule workout", timeHour + ":" + timeMinute);
                 break;
             case Constant.ACT_SHOWER:
-                timeHour = showerHour;
-                timeMinute = showerMinute;
+                timeHour = AlarmClock.showerHour;
+                timeMinute = AlarmClock.showerMinute;
                 Log.i("Schedule shower", timeHour + ":" + timeMinute);
                 break;
             case Constant.ACT_BREAKFAST:
-                timeHour = breakfastHour;
-                timeMinute = breakfastMinute;
+                timeHour = AlarmClock.breakfastHour;
+                timeMinute = AlarmClock.breakfastMinute;
                 Log.i("Schedule breakfast", timeHour + ":" + timeMinute);
                 break;
             case Constant.ACT_SCHOOL:
-                timeHour = schoolHour;
-                timeMinute = schoolMinute;
+                timeHour = AlarmClock.schoolHour;
+                timeMinute = AlarmClock.schoolMinute;
                 Log.i("Schedule school", timeHour + ":" + timeMinute);
                 break;
         }
 
+        // test all possibility
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, timeHour);
         calendar.set(Calendar.MINUTE, timeMinute);
+        if(calendar.before(Calendar.getInstance())) {
+            calendar.add(Calendar.DATE, 1);
+        }
 
-        DateTime alarm = new DateTime()
-                .withHourOfDay(timeHour)
-                .withMinuteOfHour(timeMinute);
-        Log.i("Schedule", String.valueOf(alarm.getHourOfDay()) + ":" + String.valueOf(alarm.getMinuteOfHour()));
-        long millis = alarm.getMillis(); //calendar.getTimeInMillis();
-        Log.i("Schedule back", new DateTime(millis).toString("HH:mm"));
-        return calendar.getTimeInMillis();
+        return  calendar.getTimeInMillis();
     }
 
     /**

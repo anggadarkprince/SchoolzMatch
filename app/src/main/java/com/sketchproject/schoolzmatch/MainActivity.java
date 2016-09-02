@@ -11,6 +11,8 @@ import android.support.v7.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 
+import com.sketchproject.schoolzmatch.modules.AlarmReceiver;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                if (AlarmReceiver.mp != null) {
+                    AlarmReceiver.mp.stop();
+                }
                 finish();
             }
         });

@@ -4,9 +4,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
+import android.media.MediaPlayer;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
@@ -22,7 +20,7 @@ import com.sketchproject.schoolzmatch.utils.Constant;
 import java.util.List;
 
 public class AlarmReceiver extends WakefulBroadcastReceiver {
-    public static Ringtone ringtone;
+    public static MediaPlayer mp;
 
     @Override
     public void onReceive(final Context context, Intent intent) {
@@ -33,7 +31,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
         if (alarmId == Constant.CHECKER_ID) {
             Log.i("Schedule", "Recheck Schedule");
-            //AlarmClock.updateAlarmClock(context);
+            AlarmClock.updateAlarmClock(context);
         } else {
             Log.i("Schedule", "Alarm triggered");
             ScheduleRepository scheduleRepository = new ScheduleRepository(context);
@@ -50,15 +48,32 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
                 }
             }
 
-            // start tts service
-            Intent serviceIntent = new Intent(context, TTS.class);
-            serviceIntent.putExtra(Constant.ALARM_MESSAGE, message);
-            context.startService(serviceIntent);
-
             // alarm sound
-            Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-            ringtone = RingtoneManager.getRingtone(context, uri);
-            //ringtone.play();
+            switch (alarmId) {
+                case 1:
+                    mp = MediaPlayer.create(context, R.raw.homework);
+                    break;
+                case 2:
+                    mp = MediaPlayer.create(context, R.raw.sleep);
+                    break;
+                case 3:
+                    mp = MediaPlayer.create(context, R.raw.pray);
+                    break;
+                case 4:
+                    mp = MediaPlayer.create(context, R.raw.workout);
+                    break;
+                case 5:
+                    mp = MediaPlayer.create(context, R.raw.shower);
+                    break;
+                case 6:
+                    mp = MediaPlayer.create(context, R.raw.breakfast);
+                    break;
+                case 7:
+                    mp = MediaPlayer.create(context, R.raw.school);
+                    break;
+            }
+            mp.setLooping(true);
+            mp.start();
 
             // notification
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

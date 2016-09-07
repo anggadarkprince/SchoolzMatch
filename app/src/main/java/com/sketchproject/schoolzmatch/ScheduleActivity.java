@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -55,6 +56,7 @@ public class ScheduleActivity extends AppCompatActivity implements
     private Schedule showerDuration;
     private Schedule breakfastDuration;
     private Schedule schoolDuration;
+    private Schedule statusAlarm;
 
     private int arriveBefore;
     private float distance;
@@ -66,6 +68,8 @@ public class ScheduleActivity extends AppCompatActivity implements
     TextView arrivalExpectation;
     @BindView(R.id.schoolDistance)
     TextView schoolDistance;
+    @BindView(R.id.alarmStatus)
+    SwitchCompat alarmStatus;
 
     @BindView(R.id.homework)
     TextView homework;
@@ -100,8 +104,13 @@ public class ScheduleActivity extends AppCompatActivity implements
 
         profileRepository.store(new Profile(Constant.ARRIVE_BEFORE, arriveBefore));
         profileRepository.store(new Profile(Constant.SCHOOL_DISTANCE, distance));
+        profileRepository.store(new Profile(Constant.ALARM_STATUS, alarmStatus.isChecked() ? "on" : "off"));
 
-        AlarmClock.updateAlarmClock(getApplicationContext());
+        if (alarmStatus.isChecked()) {
+            AlarmClock.updateAlarmClock(getApplicationContext());
+        } else {
+            AlarmClock.cancelAlarms();
+        }
 
         Snackbar snackbar = Snackbar.make(buttonSave, "Schedule data has been updated", Snackbar.LENGTH_LONG);
         snackbar.setActionTextColor(ContextCompat.getColor(buttonSave.getContext(), R.color.colorLight));
@@ -202,6 +211,11 @@ public class ScheduleActivity extends AppCompatActivity implements
         onDialogNumberSet(BUTTON_PICK_EXPECTATION, new BigInteger(String.valueOf(arriveBefore)), 0, false, null);
         distance = Float.parseFloat(String.valueOf(profileRepository.retrieveValueOf(Constant.SCHOOL_DISTANCE)));
         onDialogNumberSet(BUTTON_PICK_DISTANCE, new BigInteger("0"), 0, false, new BigDecimal(distance));
+        if (profileRepository.retrieveValueOf(Constant.ALARM_STATUS).equals("on")) {
+            alarmStatus.setChecked(true);
+        } else {
+            alarmStatus.setChecked(false);
+        }
 
         homeworkDuration = scheduleRepository.findData(Constant.ACT_HOMEWORK);
         wakeupDuration = scheduleRepository.findData(Constant.ACT_WAKEUP);

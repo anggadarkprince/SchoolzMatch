@@ -56,6 +56,7 @@
     <string name="label_general">General</string>
     <string name="label_school_time">School Time</string>
     <string name="label_arrival_expectation">Arrival Expectation</string>
+    <string name="label_alarm_status">Alarm Active</string>
     <string name="label_activities">Activities</string>
     <string name="label_school_distance">School Distance</string>
     <string name="label_estimation">Estimation</string>
@@ -63,6 +64,7 @@
     <string name="label_desc_school_time">Your school daily time schedule</string>
     <string name="label_desc_arrival_expectation">Arrive before bell ringing is better</string>
     <string name="label_desc_school_distance">Distance from home to school</string>
+    <string name="label_desc_alarm_status">Turn on or off the alarm</string>
 
     <string name="label_act_homework">1. Doing Homework</string>
     <string name="label_act_desc_homework">Preparing task or school project</string>

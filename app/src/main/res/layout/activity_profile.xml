@@ -37,7 +37,7 @@
             android:gravity="top"
             android:hint="@string/prompt_name"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
             android:gravity="top"
             android:hint="@string/prompt_address"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -112,7 +112,7 @@
             android:gravity="top"
             android:hint="@string/prompt_school"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -129,7 +129,7 @@
             android:gravity="top"
             android:hint="@string/prompt_grade"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/buttonSave"

@@ -34,7 +34,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="@string/label_school_time"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -64,7 +64,7 @@
             android:id="@+id/controlArrival"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/button_list"
             android:clickable="true">
 
@@ -75,7 +75,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="@string/label_arrival_expectation"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 tools:ignore="RelativeOverlap" />
 
@@ -115,6 +115,44 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/controlStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/alarmStatusLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/label_alarm_status"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:ignore="RelativeOverlap" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/alarmStatusLabel"
+                android:layout_marginBottom="10dp"
+                android:text="@string/label_desc_alarm_status"
+                android:textColor="@color/colorGray"
+                android:textSize="12sp" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/alarmStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:background="@null"
+                android:checked="true" />
+
+        </RelativeLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -138,7 +176,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="@string/label_act_homework"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 tools:ignore="RelativeOverlap" />
 
@@ -201,7 +239,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="@string/label_act_wake_up"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 tools:ignore="RelativeOverlap" />
 
@@ -264,7 +302,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="@string/label_act_pray"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 tools:ignore="RelativeOverlap" />
 
@@ -327,7 +365,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="@string/label_act_workout"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 tools:ignore="RelativeOverlap" />
 
@@ -390,7 +428,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="@string/label_act_take_a_bath"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 tools:ignore="RelativeOverlap" />
 
@@ -453,7 +491,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="@string/label_act_breakfast"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 tools:ignore="RelativeOverlap" />
 
@@ -516,7 +554,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="@string/label_act_go_to_school"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 tools:ignore="RelativeOverlap" />
 
@@ -571,7 +609,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="@string/label_school_distance"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 tools:ignore="RelativeOverlap" />
 

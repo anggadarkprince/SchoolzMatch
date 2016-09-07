@@ -75,6 +75,11 @@ public class SplashActivity extends Activity {
             profileRepository.store(Constant.ARRIVE_BEFORE, "5");
         }
 
+        // set default alarm status
+        if (!profiles.containsKey(Constant.ALARM_STATUS)) {
+            profileRepository.store(Constant.ALARM_STATUS, "on");
+        }
+
         // set default arrive before
         if (!profiles.containsKey(Constant.SCHOOL_DISTANCE)) {
             profileRepository.store(Constant.SCHOOL_DISTANCE, "10");

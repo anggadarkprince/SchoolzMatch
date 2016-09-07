@@ -104,7 +104,11 @@ public class BellActivity extends AppCompatActivity implements TimePickerDialogF
         profileRepository.store(Constant.DAY_FRIDAY, schoolTimes.get(Constant.DAY_FRIDAY));
         profileRepository.store(Constant.DAY_SATURDAY, schoolTimes.get(Constant.DAY_SATURDAY));
 
-        AlarmClock.updateAlarmClock(getApplicationContext());
+        if (profileRepository.retrieveValueOf(Constant.ALARM_STATUS).equals("on")) {
+            AlarmClock.updateAlarmClock(getApplicationContext());
+        } else {
+            AlarmClock.cancelAlarms();
+        }
 
         Toast toast = Toast.makeText(buttonSave.getContext(), "School time has been updated", Toast.LENGTH_LONG);
         View view = toast.getView();

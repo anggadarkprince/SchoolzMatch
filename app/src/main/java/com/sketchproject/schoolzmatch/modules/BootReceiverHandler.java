@@ -9,7 +9,9 @@ import android.support.v4.app.NotificationCompat;
 
 import com.sketchproject.schoolzmatch.MainActivity;
 import com.sketchproject.schoolzmatch.R;
+import com.sketchproject.schoolzmatch.database.ProfileRepository;
 import com.sketchproject.schoolzmatch.utils.AlarmClock;
+import com.sketchproject.schoolzmatch.utils.Constant;
 
 /**
  * Sketch Project Studio
@@ -31,7 +33,12 @@ public class BootReceiverHandler extends BroadcastReceiver {
             mBuilder.setContentIntent(resultPendingIntent);
             notificationManager.notify(111, mBuilder.build());
 
-            AlarmClock.updateAlarmClock(context);
+            ProfileRepository profileRepository = new ProfileRepository(context);
+            if (profileRepository.retrieveValueOf(Constant.ALARM_STATUS).equals("on")) {
+                AlarmClock.updateAlarmClock(context);
+            } else {
+                AlarmClock.cancelAlarms();
+            }
         }
     }
 }

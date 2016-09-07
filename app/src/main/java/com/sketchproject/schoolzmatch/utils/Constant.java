@@ -23,6 +23,7 @@ public class Constant {
 
     public static final String ARRIVE_BEFORE = "before";
     public static final String SCHOOL_DISTANCE = "distance";
+    public static final String ALARM_STATUS = "status";
 
     public static final String ACT_HOMEWORK = "Homework";
     public static final String ACT_WAKEUP = "Sleep";

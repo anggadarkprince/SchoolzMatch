@@ -82,7 +82,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context.getApplicationContext())
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle(message)
-                        .setContentText("Tap to launch Schoolz Match!");
+                        .setContentText("Tap to launch " + context.getString(R.string.app_name) + "!");
 
                 // notification tap action
                 Intent resultIntent = new Intent(context.getApplicationContext(), MainActivity.class);

@@ -25,7 +25,7 @@ public class BootReceiverHandler extends BroadcastReceiver {
 
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                     .setSmallIcon(R.mipmap.ic_launcher)
-                    .setContentTitle("Schoolz Match")
+                    .setContentTitle(context.getString(R.string.app_name))
                     .setContentText("Hello alarm, the schedule has been set!");
 
             Intent resultIntent = new Intent(context, MainActivity.class);

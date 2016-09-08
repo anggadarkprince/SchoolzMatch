@@ -24,11 +24,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class BellActivity extends AppCompatActivity implements TimePickerDialogFragment.TimePickerDialogHandler {
-    ProfileRepository profileRepository;
+    private ProfileRepository profileRepository;
 
-    TimePickerBuilder timePickerBuilder;
+    private TimePickerBuilder timePickerBuilder;
 
-    Map<String, Object> schoolTimes;
+    private Map<String, Object> schoolTimes;
 
     @BindView(R.id.buttonSave)
     Button buttonSave;

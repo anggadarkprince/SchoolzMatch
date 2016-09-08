@@ -6,7 +6,6 @@ package com.sketchproject.schoolzmatch.utils;
  */
 public class Constant {
     public static final String DAY_OFF = "off";
-    public static final String DAY_SUNDAY = "sunday";
     public static final String DAY_MONDAY = "monday";
     public static final String DAY_TUESDAY = "tuesday";
     public static final String DAY_WEDNESDAY = "wednesday";
@@ -26,7 +25,7 @@ public class Constant {
     public static final String ALARM_STATUS = "status";
 
     public static final String ACT_HOMEWORK = "Homework";
-    public static final String ACT_WAKEUP = "Sleep";
+    public static final String ACT_SLEEP = "Sleep";
     public static final String ACT_PRAY = "Pray";
     public static final String ACT_WORKOUT = "Workout";
     public static final String ACT_SHOWER = "Take a bath";
@@ -36,7 +35,7 @@ public class Constant {
     public static final String HOUR = "hour";
     public static final String MINUTE = "minute";
 
-    public static final int HOUR_DAY_CHANGE = 15;
+    public static final int HOUR_DAY_CHANGE = 13;
     public static final int CHECKER_ID = 99;
 
     public static final String ALARM_MESSAGE = "alarmMessage";

@@ -89,12 +89,12 @@ public class SplashActivity extends Activity {
 
         // set default homework duration
         if (scheduleRepository.findData(Constant.ACT_HOMEWORK) == null) {
-            scheduleRepository.store(new Schedule(Constant.ACT_HOMEWORK, "Doing homework before sleep", "01:00"));
+            scheduleRepository.store(new Schedule(Constant.ACT_HOMEWORK, "Doing homework before sleep", "19:00"));
         }
 
         // set default sleep duration
-        if (scheduleRepository.findData(Constant.ACT_WAKEUP) == null) {
-            scheduleRepository.store(new Schedule(Constant.ACT_WAKEUP, "Rest of the day", "08:00"));
+        if (scheduleRepository.findData(Constant.ACT_SLEEP) == null) {
+            scheduleRepository.store(new Schedule(Constant.ACT_SLEEP, "Rest of the day", "08:00"));
         }
 
         // set default pray duration

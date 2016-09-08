@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.SystemClock;
 import android.util.Log;
 
 import com.sketchproject.schoolzmatch.R;
@@ -21,7 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Sketch Project Studio
@@ -187,17 +185,16 @@ public class AlarmClock {
             AlarmClock.prayMinute = breakHHmm(alarmPray.toString("HH:mm")).get(Constant.MINUTE);
             Log.i("Schedule", "Pray " + alarmPray.toString("HH:mm"));
 
-            schedule = getActivityDuration(context, Constant.ACT_WAKEUP);
+            schedule = getActivityDuration(context, Constant.ACT_SLEEP);
             DateTime alarmSleep = alarmPray.minusHours(schedule.get(Constant.HOUR)).minusMinutes(schedule.get(Constant.MINUTE));
             AlarmClock.wakeupHour = breakHHmm(alarmSleep.toString("HH:mm")).get(Constant.HOUR);
             AlarmClock.wakeupMinute = breakHHmm(alarmSleep.toString("HH:mm")).get(Constant.MINUTE);
             Log.i("Schedule", "Sleep " + alarmSleep.toString("HH:mm"));
 
             schedule = getActivityDuration(context, Constant.ACT_HOMEWORK);
-            DateTime alarmHomework = alarmSleep.minusHours(schedule.get(Constant.HOUR)).minusMinutes(schedule.get(Constant.MINUTE));
-            AlarmClock.homeworkHour = breakHHmm(alarmHomework.toString("HH:mm")).get(Constant.HOUR);
-            AlarmClock.homeworkMinute = breakHHmm(alarmHomework.toString("HH:mm")).get(Constant.MINUTE);
-            Log.i("Schedule", "Doing homework " + alarmHomework.toString("HH:mm"));
+            AlarmClock.homeworkHour = schedule.get(Constant.HOUR);
+            AlarmClock.homeworkMinute = schedule.get(Constant.MINUTE);
+            Log.i("Schedule", "Doing homework " + AlarmClock.homeworkHour + " " + AlarmClock.homeworkMinute);
 
             Log.i("Schedule Check", "Schedule today: " + dayName);
             Log.i("Schedule Check", "Bell time " + AlarmClock.bellHour + " " + AlarmClock.bellMinute);
@@ -222,7 +219,7 @@ public class AlarmClock {
      * @param context application context
      */
     public static void setupAlarmChecker(Context context) {
-        if(alarmManagerRecheck != null){
+        if (alarmManagerRecheck != null) {
             alarmManagerRecheck.cancel(pendingIntentRecheck);
         }
         Calendar calendar = Calendar.getInstance();
@@ -310,7 +307,7 @@ public class AlarmClock {
                 timeMinute = AlarmClock.homeworkMinute;
                 Log.i("Schedule homework", timeHour + ":" + timeMinute);
                 break;
-            case Constant.ACT_WAKEUP:
+            case Constant.ACT_SLEEP:
                 timeHour = AlarmClock.wakeupHour;
                 timeMinute = AlarmClock.wakeupMinute;
                 Log.i("Schedule sleep", timeHour + ":" + timeMinute);
@@ -346,11 +343,11 @@ public class AlarmClock {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, timeHour);
         calendar.set(Calendar.MINUTE, timeMinute);
-        if(calendar.before(Calendar.getInstance())) {
+        if (calendar.before(Calendar.getInstance())) {
             calendar.add(Calendar.DATE, 1);
         }
 
-        return  calendar.getTimeInMillis();
+        return calendar.getTimeInMillis();
     }
 
     /**

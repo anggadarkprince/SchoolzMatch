@@ -67,22 +67,22 @@
     <string name="label_desc_alarm_status">Turn on or off the alarm</string>
 
     <string name="label_act_homework">1. Doing Homework</string>
-    <string name="label_act_desc_homework">Preparing task or school project</string>
+    <string name="label_act_desc_homework">Preparing school task at time</string>
     <string name="label_act_wake_up">2. Wake Up</string>
-    <string name="label_act_desc_wake_up">Get up in the morning</string>
+    <string name="label_act_desc_wake_up">Duration of sleep</string>
     <string name="label_act_pray">3. Pray</string>
-    <string name="label_act_desc_pray">Shalat for moslem</string>
+    <string name="label_act_desc_pray">duration of pray for moslem</string>
     <string name="label_act_workout">4. Workout</string>
-    <string name="label_act_desc_workout">Doing exercises or light sport</string>
+    <string name="label_act_desc_workout">Duration of exercises or light sport</string>
     <string name="label_act_take_a_bath">5. Take a bath</string>
-    <string name="label_act_desc_take_a_bath">Shower and take a bath</string>
+    <string name="label_act_desc_take_a_bath">Duration of take a bath</string>
     <string name="label_act_breakfast">6. Breakfast</string>
-    <string name="label_act_desc_breakfast">Shower and take a bath</string>
+    <string name="label_act_desc_breakfast">Duration eat and drink</string>
     <string name="label_act_go_to_school">7. Go to school</string>
     <string name="label_act_desc_go_to_school">Time to arrive at school</string>
 
     <string name="label_for_moslem">FOR MOSLEM</string>
-    <string name="label_before_sleep">BEFORE SLEEP</string>
+    <string name="label_before_sleep">DO AT</string>
     <string name="label_morning">MORNING</string>
     <string name="label_exercise">EXERCISE</string>
     <string name="label_clean_and_fresh">CLEAN AND FRESH</string>

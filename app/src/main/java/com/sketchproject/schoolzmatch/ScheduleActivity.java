@@ -14,6 +14,8 @@ import com.codetroopers.betterpickers.hmspicker.HmsPickerBuilder;
 import com.codetroopers.betterpickers.hmspicker.HmsPickerDialogFragment;
 import com.codetroopers.betterpickers.numberpicker.NumberPickerBuilder;
 import com.codetroopers.betterpickers.numberpicker.NumberPickerDialogFragment;
+import com.codetroopers.betterpickers.timepicker.TimePickerBuilder;
+import com.codetroopers.betterpickers.timepicker.TimePickerDialogFragment;
 import com.sketchproject.schoolzmatch.database.Profile;
 import com.sketchproject.schoolzmatch.database.ProfileRepository;
 import com.sketchproject.schoolzmatch.database.Schedule;
@@ -30,12 +32,12 @@ import butterknife.OnClick;
 
 public class ScheduleActivity extends AppCompatActivity implements
         NumberPickerDialogFragment.NumberPickerDialogHandlerV2,
-        HmsPickerDialogFragment.HmsPickerDialogHandlerV2 {
+        HmsPickerDialogFragment.HmsPickerDialogHandlerV2,
+        TimePickerDialogFragment.TimePickerDialogHandler {
 
     private static final int BUTTON_PICK_EXPECTATION = 0;
     private static final int BUTTON_PICK_DISTANCE = 1;
 
-    private static final int BUTTON_PICK_HOMEWORK = 0;
     private static final int BUTTON_PICK_WAKEUP = 1;
     private static final int BUTTON_PICK_PRAY = 2;
     private static final int BUTTON_PICK_WORKOUT = 3;
@@ -45,6 +47,7 @@ public class ScheduleActivity extends AppCompatActivity implements
 
     private NumberPickerBuilder numberPickerBuilder;
     private HmsPickerBuilder hmsPickerBuilder;
+    private TimePickerBuilder timePickerBuilder;
 
     private ScheduleRepository scheduleRepository;
     private ProfileRepository profileRepository;
@@ -56,7 +59,6 @@ public class ScheduleActivity extends AppCompatActivity implements
     private Schedule showerDuration;
     private Schedule breakfastDuration;
     private Schedule schoolDuration;
-    private Schedule statusAlarm;
 
     private int arriveBefore;
     private float distance;
@@ -149,8 +151,7 @@ public class ScheduleActivity extends AppCompatActivity implements
 
     @OnClick(R.id.controlHomework)
     void changeHomeworkDuration() {
-        hmsPickerBuilder.setReference(BUTTON_PICK_HOMEWORK);
-        hmsPickerBuilder.show();
+        timePickerBuilder.show();
     }
 
     @OnClick(R.id.controlWakeup)
@@ -204,6 +205,10 @@ public class ScheduleActivity extends AppCompatActivity implements
                 .setFragmentManager(getSupportFragmentManager())
                 .setStyleResId(R.style.CustomBetterPickerTheme);
 
+        timePickerBuilder = new TimePickerBuilder()
+                .setFragmentManager(getSupportFragmentManager())
+                .setStyleResId(R.style.CustomBetterPickerTheme);
+
         scheduleRepository = new ScheduleRepository(getApplicationContext());
         profileRepository = new ProfileRepository(getApplicationContext());
 
@@ -218,14 +223,14 @@ public class ScheduleActivity extends AppCompatActivity implements
         }
 
         homeworkDuration = scheduleRepository.findData(Constant.ACT_HOMEWORK);
-        wakeupDuration = scheduleRepository.findData(Constant.ACT_WAKEUP);
+        wakeupDuration = scheduleRepository.findData(Constant.ACT_SLEEP);
         prayDuration = scheduleRepository.findData(Constant.ACT_PRAY);
         workoutDuration = scheduleRepository.findData(Constant.ACT_WORKOUT);
         showerDuration = scheduleRepository.findData(Constant.ACT_SHOWER);
         breakfastDuration = scheduleRepository.findData(Constant.ACT_BREAKFAST);
         schoolDuration = scheduleRepository.findData(Constant.ACT_SCHOOL);
 
-        homework.setText(AlarmClock.formatHHmm(homeworkDuration.getTime()));
+        homework.setText(homeworkDuration.getTime());
         wakeup.setText(AlarmClock.formatHHmm(wakeupDuration.getTime()));
         pray.setText(AlarmClock.formatHHmm(prayDuration.getTime()));
         workout.setText(AlarmClock.formatHHmm(workoutDuration.getTime()));
@@ -249,10 +254,6 @@ public class ScheduleActivity extends AppCompatActivity implements
     @Override
     public void onDialogHmsSet(int reference, boolean isNegative, int hours, int minutes, int seconds) {
         switch (reference) {
-            case BUTTON_PICK_HOMEWORK:
-                homeworkDuration.setTime(AlarmClock.formatTime(ScheduleActivity.this, hours, minutes));
-                homework.setText(AlarmClock.formatDuration(hours, minutes));
-                break;
             case BUTTON_PICK_WAKEUP:
                 wakeupDuration.setTime(AlarmClock.formatTime(ScheduleActivity.this, hours, minutes));
                 wakeup.setText(AlarmClock.formatDuration(hours, minutes));
@@ -278,5 +279,12 @@ public class ScheduleActivity extends AppCompatActivity implements
                 school.setText(AlarmClock.formatDuration(hours, minutes));
                 break;
         }
+    }
+
+    @Override
+    public void onDialogTimeSet(int reference, int hourOfDay, int minute) {
+        String pickedTime = AlarmClock.formatTime(ScheduleActivity.this, hourOfDay, minute);
+        homework.setText(pickedTime);
+        homeworkDuration.setTime(pickedTime);
     }
 }
